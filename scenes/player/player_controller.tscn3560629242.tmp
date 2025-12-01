@@ -20,8 +20,11 @@ shape = SubResource("CapsuleShape3D_ev2gv")
 [node name="CameraController" type="Node3D" parent="." node_paths=PackedStringArray("player_controller", "mouse_capture_component")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_iivv4")
+debug = null
 player_controller = NodePath("..")
 mouse_capture_component = NodePath("../Components/MouseCapture")
+tilt_lower_limit = null
+tilt_upper_limit = null
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 
@@ -29,4 +32,3 @@ mouse_capture_component = NodePath("../Components/MouseCapture")
 
 [node name="MouseCapture" type="Node" parent="Components"]
 script = ExtResource("1_4q5nu")
-debug = true
