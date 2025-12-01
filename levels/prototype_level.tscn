@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://djhb5qdlqfllh"]
+
+[ext_resource type="PackedScene" uid="uid://cqoqu4rqw626m" path="res://levels/world_environment.tscn" id="1_1ykrc"]
+[ext_resource type="PackedScene" uid="uid://kstvnp3rcr0x" path="res://scenes/player/player_controller.tscn" id="1_ycx7s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycx7s"]
+albedo_color = Color(0.22637165, 0.09847147, 0.006247985, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qgtqi"]
+material = SubResource("StandardMaterial3D_ycx7s")
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1ykrc"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ykrc"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1ykrc"]
+material = SubResource("StandardMaterial3D_1ykrc")
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ycx7s"]
+size = Vector3(2, 0.5, 2)
+
+[node name="PrototypeLevel" type="Node3D"]
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/Floor"]
+mesh = SubResource("BoxMesh_qgtqi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/Floor"]
+shape = SubResource("BoxShape3D_1ykrc")
+
+[node name="CrouchCheck" type="StaticBody3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/CrouchCheck"]
+mesh = SubResource("BoxMesh_1ykrc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/CrouchCheck"]
+shape = SubResource("BoxShape3D_ycx7s")
+
+[node name="PlayerController" parent="." instance=ExtResource("1_ycx7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3.540039)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_1ykrc")]

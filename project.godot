@@ -11,5 +11,16 @@ config_version=5
 [application]
 
 config/name="FPS Tutorial"
+run/main_scene="uid://djhb5qdlqfllh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "red",
+"res://assets/": "green",
+"res://levels/": "yellow",
+"res://scenes/": "blue",
+"res://scripts/": "orange"
+}
