@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://kstvnp3rcr0x" path="res://scenes/player/player_controller.tscn" id="1_ycx7s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycx7s"]
-albedo_color = Color(0.22637165, 0.09847147, 0.006247985, 1)
+albedo_color = Color(0.22947559, 0.4625128, 0.007961115, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qgtqi"]
 material = SubResource("StandardMaterial3D_ycx7s")
@@ -37,7 +37,7 @@ mesh = SubResource("BoxMesh_qgtqi")
 shape = SubResource("BoxShape3D_1ykrc")
 
 [node name="CrouchCheck" type="StaticBody3D" parent="Geometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry/CrouchCheck"]
 mesh = SubResource("BoxMesh_1ykrc")

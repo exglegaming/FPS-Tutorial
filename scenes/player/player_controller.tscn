@@ -8,8 +8,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ev2gv"]
 
-[node name="PlayerController" type="CharacterBody3D"]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
+collision_layer = 0
 script = ExtResource("1_0cfoe")
+camera = NodePath("CameraController")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_ev2gv")
@@ -29,4 +31,3 @@ mouse_capture_component = NodePath("../Components/MouseCapture")
 
 [node name="MouseCapture" type="Node" parent="Components"]
 script = ExtResource("1_4q5nu")
-debug = true
