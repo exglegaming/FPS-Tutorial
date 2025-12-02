@@ -6,20 +6,29 @@ extends CharacterBody3D
 
 @export_category("References")
 @export var camera: CameraController
+@export var state_chart: StateChart
+@export var standing_collision: CollisionShape3D
 
 @export_category("Movement Settings")
 @export_group("Easing")
 @export var acceleration: float = 0.2
 @export var deceleration: float = 0.5
+@export_group("Speed")
+@export var default_speed: float = 7.0
+@export var sprint_speed: float
 
 var _input_dir: Vector2 = Vector2.ZERO
 var _movement_velocity: Vector3 = Vector3.ZERO
+var sprint_modifier: float = 0.0
 var speed: float = 0.0
 
 
 func _physics_process(delta: float) -> void:
     if!is_on_floor():
         velocity += get_gravity() * delta
+    
+    var speed_modifier = sprint_modifier
+    speed = default_speed + speed_modifier
 
     _input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
     var current_velocity: Vector2 = Vector2(_movement_velocity.x, _movement_velocity.z)
@@ -39,3 +48,11 @@ func _physics_process(delta: float) -> void:
 
 func update_rotation(rotation_input: Vector3) -> void:
     global_transform.basis = Basis.from_euler(rotation_input)
+
+
+func sprint() -> void:
+    sprint_modifier = sprint_speed
+
+
+func walk() -> void:
+    sprint_modifier = 0.0

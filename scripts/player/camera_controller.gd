@@ -21,6 +21,10 @@ const DEFAULT_HEIGHT: float = 0.5
 var _rotation: Vector3
 
 
+func _process(_delta: float) -> void:
+	update_camera_rotation(mouse_capture_component._mouse_input)
+
+
 func update_camera_rotation(input: Vector2) -> void:
 	_rotation.x += input.y
 	_rotation.y += input.x
@@ -30,6 +34,7 @@ func update_camera_rotation(input: Vector2) -> void:
 	var _camera_rotation = Vector3(_rotation.x, 0.0, 0.0)
 
 	transform.basis = Basis.from_euler(_camera_rotation)
+	player_controller.update_rotation(_player_rotation)
 
 	rotation.z = 0.0
 
