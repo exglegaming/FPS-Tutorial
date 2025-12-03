@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://kstvnp3rcr0x"]
+[gd_scene load_steps=25 format=3 uid="uid://kstvnp3rcr0x"]
 
 [ext_resource type="Script" uid="uid://08emh4pujwrl" path="res://scripts/player/player_controller.gd" id="1_0cfoe"]
-[ext_resource type="Script" uid="uid://dcjm07588qvog" path="res://scripts/player/mouse_capture.gd" id="1_4q5nu"]
+[ext_resource type="Script" uid="uid://dcjm07588qvog" path="res://scripts/player/components/mouse_capture.gd" id="1_4q5nu"]
 [ext_resource type="Script" uid="uid://dtcj0oadk7vha" path="res://scripts/player/camera_controller.gd" id="1_iivv4"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_y4pjd"]
+[ext_resource type="Script" uid="uid://5uyprqmiog5t" path="res://scripts/player/components/interaction_raycast.gd" id="4_cv1cy"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_m7hbg"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="5_2k8ub"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="6_rkuj1"]
@@ -28,7 +29,7 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wpncg"]
 
-[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("camera", "state_chart", "standing_collision", "crouching_collision", "crouch_check")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("camera", "state_chart", "standing_collision", "crouching_collision", "crouch_check", "interaction_raycast")]
 collision_layer = 0
 script = ExtResource("1_0cfoe")
 camera = NodePath("CameraController")
@@ -36,13 +37,14 @@ state_chart = NodePath("StateChart")
 standing_collision = NodePath("StandingCollision")
 crouching_collision = NodePath("CrouchingCollision")
 crouch_check = NodePath("ShapeCast3D")
+interaction_raycast = NodePath("CameraController/Camera3D/InteractionRaycast")
 
 [node name="StateChartDebugger" parent="." instance=ExtResource("2_y4pjd")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_right = 326.0
-offset_bottom = 394.0
+offset_right = 520.0
+offset_bottom = 473.0
 grow_horizontal = 1
 grow_vertical = 1
 initial_node_to_watch = NodePath("../StateChart")
@@ -68,6 +70,10 @@ player_controller = NodePath("..")
 mouse_capture_component = NodePath("../Components/MouseCapture")
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
+
+[node name="InteractionRaycast" type="RayCast3D" parent="CameraController/Camera3D"]
+target_position = Vector3(0, 0, -3)
+script = ExtResource("4_cv1cy")
 
 [node name="Components" type="Node" parent="."]
 
@@ -214,6 +220,7 @@ script = ExtResource("15_m6lbn")
 script = ExtResource("17_kqh78")
 
 [node name="PostureState" type="Node" parent="StateMachine"]
+script = ExtResource("10_nwn0c")
 
 [node name="StandingState" type="Node" parent="StateMachine/PostureState"]
 script = ExtResource("16_rgtnl")

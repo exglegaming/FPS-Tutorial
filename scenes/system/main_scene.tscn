@@ -1,11 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv0rikr4yxtkl"]
+[gd_scene load_steps=4 format=3 uid="uid://dv0rikr4yxtkl"]
 
 [ext_resource type="PackedScene" uid="uid://djhb5qdlqfllh" path="res://levels/prototype_level.tscn" id="1_mgb3u"]
+[ext_resource type="Script" uid="uid://hodfi6656vlc" path="res://scripts/system/game_manager.gd" id="1_qoi2i"]
 [ext_resource type="PackedScene" uid="uid://dyut1youd3wt5" path="res://scenes/ui/user_interface.tscn" id="1_rtgv3"]
 
 [node name="MainScene" type="Node"]
 
 [node name="Managers" type="Node" parent="."]
+
+[node name="GameManager" type="Node" parent="Managers"]
+script = ExtResource("1_qoi2i")
 
 [node name="CurrentLevel" type="Node3D" parent="."]
 

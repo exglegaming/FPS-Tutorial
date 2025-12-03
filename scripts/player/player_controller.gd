@@ -10,6 +10,7 @@ extends CharacterBody3D
 @export var standing_collision: CollisionShape3D
 @export var crouching_collision: CollisionShape3D
 @export var crouch_check: ShapeCast3D
+@export var interaction_raycast: RayCast3D
 
 @export_category("Movement Settings")
 @export_group("Easing")
