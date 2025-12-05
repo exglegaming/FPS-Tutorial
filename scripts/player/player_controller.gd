@@ -12,6 +12,7 @@ extends CharacterBody3D
 @export var crouching_collision: CollisionShape3D
 @export var crouch_check: ShapeCast3D
 @export var interaction_raycast: RayCast3D
+@export var step_handler: StepHandlerComponent
 
 @export_category("Movement Settings")
 @export_group("Easing")
@@ -29,16 +30,19 @@ extends CharacterBody3D
 @export_category("Data Helpers")
 @export var data_relative_velocity: Vector3
 
+var current_fall_velocity: float
+var previous_velocity: Vector3
 var _input_dir: Vector2 = Vector2.ZERO
 var _movement_velocity: Vector3 = Vector3.ZERO
 var _sprint_modifier: float = 0.0
 var _crouch_modifier: float = 0.0
 var _speed: float = 0.0
-var current_fall_velocity: float
 
 
 func _physics_process(delta: float) -> void:
-    if!is_on_floor():
+    previous_velocity = velocity
+    
+    if !is_on_floor():
         velocity += get_gravity() * delta
     
     var speed_modifier = _sprint_modifier + _crouch_modifier
@@ -58,6 +62,9 @@ func _physics_process(delta: float) -> void:
     velocity = _movement_velocity
 
     move_and_slide()
+
+    if is_on_floor():
+        step_handler.handle_step_climbing()
 
 
 func update_rotation(rotation_input: Vector3) -> void:
@@ -95,3 +102,7 @@ func check_fall_speed() -> bool:
     else:
         current_fall_velocity = 0.0
         return false
+
+
+func get_input_direction() -> Vector2:
+    return _input_dir
