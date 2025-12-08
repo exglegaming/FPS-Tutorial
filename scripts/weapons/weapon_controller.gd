@@ -4,13 +4,16 @@ extends Node
 
 @export var current_weapon: Weapon
 @export var weapon_model_parent: Node3D
+@export var weapon_state_chart: StateChart
 
 var current_weapon_model: Node3D
+var current_ammo: int
 
 
 func _ready() -> void:
     if current_weapon:
         spawn_weapon_model()
+        current_ammo = current_weapon.max_ammo
 
 
 func spawn_weapon_model() -> void:
@@ -21,3 +24,14 @@ func spawn_weapon_model() -> void:
         current_weapon_model = current_weapon.weapon_model.instantiate()
         weapon_model_parent.add_child(current_weapon_model)
         current_weapon_model.position = current_weapon.weapon_position
+
+
+func can_fire() -> bool:
+    return current_ammo > 0
+
+
+func fire_wewapon() -> void:
+    if can_fire():
+        current_ammo -= 1
+        print("Fired! Ammo: %d" % current_ammo)
+

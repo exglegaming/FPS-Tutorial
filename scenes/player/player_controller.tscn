@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://kstvnp3rcr0x"]
+[gd_scene load_steps=33 format=3 uid="uid://kstvnp3rcr0x"]
 
 [ext_resource type="Script" uid="uid://08emh4pujwrl" path="res://scripts/player/player_controller.gd" id="1_0cfoe"]
 [ext_resource type="Script" uid="uid://dcjm07588qvog" path="res://scripts/player/components/mouse_capture.gd" id="1_4q5nu"]
@@ -24,6 +24,10 @@
 [ext_resource type="Script" uid="uid://b1n4hsmvj5rav" path="res://scripts/player/states/standing_state.gd" id="16_rgtnl"]
 [ext_resource type="Script" uid="uid://d1gubcbv7s8n5" path="res://scripts/player/states/crouching_state.gd" id="17_ggkdx"]
 [ext_resource type="Script" uid="uid://cxhl5n5p706dv" path="res://scripts/player/states/airborne_state.gd" id="17_kqh78"]
+[ext_resource type="Script" uid="uid://ddecwi4nrqdx1" path="res://scripts/weapons/weapon_state_machine.gd" id="25_fq3by"]
+[ext_resource type="Script" uid="uid://di6exm5a7um1v" path="res://scripts/weapons/states/weapon_idle_state.gd" id="25_rue81"]
+[ext_resource type="Script" uid="uid://ck6xn550o7fj5" path="res://scripts/weapons/states/weapon_firing_state.gd" id="26_fq3by"]
+[ext_resource type="Script" uid="uid://dvyeem8e82jx1" path="res://scripts/weapons/states/weapon_empty_state.gd" id="27_rm031"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ev2gv"]
 
@@ -92,10 +96,11 @@ script = ExtResource("1_4q5nu")
 script = ExtResource("7_3nb03")
 player = NodePath("../..")
 
-[node name="WeaponController" type="Node" parent="Components" node_paths=PackedStringArray("weapon_model_parent")]
+[node name="WeaponController" type="Node" parent="Components" node_paths=PackedStringArray("weapon_model_parent", "weapon_state_chart")]
 script = ExtResource("8_aoka8")
 current_weapon = ExtResource("9_2xfig")
 weapon_model_parent = NodePath("../../CameraController/Camera3D")
+weapon_state_chart = NodePath("../../WeaponStateChart")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_m7hbg")
@@ -245,6 +250,55 @@ script = ExtResource("16_rgtnl")
 [node name="CrouchingState" type="Node" parent="StateMachine/PostureState"]
 script = ExtResource("17_ggkdx")
 
+[node name="WeaponStateChart" type="Node" parent="."]
+script = ExtResource("4_m7hbg")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="Root" type="Node" parent="WeaponStateChart"]
+script = ExtResource("6_rkuj1")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="WeaponStateChart/Root"]
+script = ExtResource("7_ers80")
+
+[node name="FiringState" type="Node" parent="WeaponStateChart/Root"]
+script = ExtResource("7_ers80")
+
+[node name="EmptyState" type="Node" parent="WeaponStateChart/Root"]
+script = ExtResource("7_ers80")
+
+[node name="OnIdle" type="Node" parent="WeaponStateChart/Root"]
+script = ExtResource("8_2k8ub")
+to = NodePath("../IdleState")
+event = &"onIdle"
+delay_in_seconds = "0.0"
+
+[node name="OnFiring" type="Node" parent="WeaponStateChart/Root"]
+script = ExtResource("8_2k8ub")
+to = NodePath("../FiringState")
+event = &"onFiring"
+delay_in_seconds = "0.0"
+
+[node name="OnEmpty" type="Node" parent="WeaponStateChart/Root"]
+script = ExtResource("8_2k8ub")
+to = NodePath("../EmptyState")
+event = &"onEmpty"
+delay_in_seconds = "0.0"
+
+[node name="WeaponStateMachine" type="Node" parent="." node_paths=PackedStringArray("weapon_controller")]
+unique_name_in_owner = true
+script = ExtResource("25_fq3by")
+weapon_controller = NodePath("../Components/WeaponController")
+
+[node name="IdleState" type="Node" parent="WeaponStateMachine"]
+script = ExtResource("25_rue81")
+
+[node name="FiringState" type="Node" parent="WeaponStateMachine"]
+script = ExtResource("26_fq3by")
+
+[node name="EmptyState" type="Node" parent="WeaponStateMachine"]
+script = ExtResource("27_rm031")
+
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded" to="StateMachine/MovementState/GroundedState" method="_on_grounded_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Idle" to="StateMachine/MovementState/GroundedState/IdleState" method="_on_idle_state_physics_processing"]
 [connection signal="state_physics_processing" from="StateChart/Root/Movement/Grounded/Moving" to="StateMachine/MovementState/GroundedState/MovingState" method="_on_moving_state_physics_processing"]
@@ -257,3 +311,8 @@ script = ExtResource("17_ggkdx")
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Standing" to="StateMachine/PostureState/StandingState" method="_on_standing_state_physics_processing"]
 [connection signal="state_entered" from="StateChart/Root/Posture/Crouching" to="StateMachine/PostureState/CrouchingState" method="_on_crouching_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/Root/Posture/Crouching" to="StateMachine/PostureState/CrouchingState" method="_on_crouching_state_physics_processing"]
+[connection signal="state_processing" from="WeaponStateChart/Root/IdleState" to="WeaponStateMachine/IdleState" method="_on_idle_state_processing"]
+[connection signal="state_entered" from="WeaponStateChart/Root/FiringState" to="WeaponStateMachine/FiringState" method="_on_firing_state_entered"]
+[connection signal="state_physics_processing" from="WeaponStateChart/Root/FiringState" to="WeaponStateMachine/FiringState" method="_on_firing_state_physics_processing"]
+[connection signal="state_entered" from="WeaponStateChart/Root/EmptyState" to="WeaponStateMachine/EmptyState" method="_on_empty_state_entered"]
+[connection signal="state_processing" from="WeaponStateChart/Root/EmptyState" to="WeaponStateMachine/EmptyState" method="_on_empty_state_processing"]
