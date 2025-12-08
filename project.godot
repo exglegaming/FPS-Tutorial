@@ -25,6 +25,7 @@ folder_colors={
 "res://addons/": "red",
 "res://assets/": "green",
 "res://levels/": "yellow",
+"res://resources/": "purple",
 "res://scenes/": "blue",
 "res://scripts/": "orange",
 "res://trenchbroom/": "gray"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://kstvnp3rcr0x"]
+[gd_scene load_steps=29 format=3 uid="uid://kstvnp3rcr0x"]
 
 [ext_resource type="Script" uid="uid://08emh4pujwrl" path="res://scripts/player/player_controller.gd" id="1_0cfoe"]
 [ext_resource type="Script" uid="uid://dcjm07588qvog" path="res://scripts/player/components/mouse_capture.gd" id="1_4q5nu"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" uid="uid://d2ddqq2vuiy1m" path="res://scripts/player/components/step_climber.gd" id="7_3nb03"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="7_ers80"]
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="8_2k8ub"]
+[ext_resource type="Script" uid="uid://dcxdf2wf4ldi5" path="res://scripts/weapons/weapon_controller.gd" id="8_aoka8"]
+[ext_resource type="Resource" uid="uid://cquy7xwbo1ws0" path="res://resources/weapons/pistol.tres" id="9_2xfig"]
 [ext_resource type="Script" uid="uid://bsyy06lpxj7g" path="res://scripts/player/components/state_machine.gd" id="9_rkuj1"]
 [ext_resource type="Script" uid="uid://gjx88rcdv2vy" path="res://scripts/player/states/idle_state.gd" id="10_ers80"]
 [ext_resource type="Script" uid="uid://x6lr1gf72pkj" path="res://scripts/player/states/base_state.gd" id="10_nwn0c"]
@@ -89,6 +91,11 @@ script = ExtResource("1_4q5nu")
 [node name="StepHandler" type="Node" parent="Components" node_paths=PackedStringArray("player")]
 script = ExtResource("7_3nb03")
 player = NodePath("../..")
+
+[node name="WeaponController" type="Node" parent="Components" node_paths=PackedStringArray("weapon_model_parent")]
+script = ExtResource("8_aoka8")
+current_weapon = ExtResource("9_2xfig")
+weapon_model_parent = NodePath("../../CameraController/Camera3D")
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("4_m7hbg")
