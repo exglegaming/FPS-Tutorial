@@ -1,0 +1,89 @@
+// Game: FpsTutorial
+// Format: Valve
+// entity 0
+{
+"mapversion" "220"
+"wad" ""
+"classname" "worldspawn"
+"_tb_mod" "trenchbroom"
+// brush 0
+{
+( -576 -64 -32 ) ( -576 -63 -32 ) ( -576 -64 -31 ) texture [ 0 -1 0 0 ] [ 0 0 -1 -16 ] 0 1 1
+( -64 -384 -32 ) ( -64 -384 -31 ) ( -63 -384 -32 ) texture [ 1 0 0 0 ] [ 0 0 -1 -16 ] 90 1 1
+( -64 -64 -32 ) ( -63 -64 -32 ) ( -64 -63 -32 ) texture [ -1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 64 64 0 ) ( 64 65 0 ) ( 65 64 0 ) texture [ 1 0 0 0 ] [ 0 -1 0 0 ] 180 1 1
+( 64 576 0 ) ( 65 576 0 ) ( 64 576 1 ) texture [ -1 0 0 0 ] [ 0 0 -1 -16 ] 0 1 1
+( 576 64 0 ) ( 576 64 1 ) ( 576 65 0 ) texture [ 0 1 0 0 ] [ 0 0 -1 -16 ] 90 1 1
+}
+// brush 1
+{
+( 560 -384 0 ) ( 560 -383 0 ) ( 560 -384 1 ) t_floormetal1 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 560 -384 0 ) ( 560 -384 1 ) ( 561 -384 0 ) t_floormetal1 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 560 -384 0 ) ( 561 -384 0 ) ( 560 -383 0 ) t_floormetal1 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 576 576 272 ) ( 576 577 272 ) ( 577 576 272 ) t_floormetal1 [ 1 0 0 0 ] [ 0 -1 0 0 ] 270 1 1
+( 576 576 16 ) ( 577 576 16 ) ( 576 576 17 ) t_floormetal1 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 576 576 16 ) ( 576 576 17 ) ( 576 577 16 ) t_floormetal1 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+}
+// entity 1
+{
+"classname" "func_movingplatform"
+"move_distance" "2"
+"move_direction" "0.0 1.0 0.0"
+"move_time" "2"
+// brush 0
+{
+( -144 32 0 ) ( -144 33 0 ) ( -144 32 1 ) t_floormetal1 [ 0 -1 0 -48 ] [ 0 0 -1 -80 ] 90 1 1
+( -144 0 0 ) ( -144 0 1 ) ( -143 0 0 ) t_floormetal1 [ 1 0 0 48 ] [ 0 0 -1 -80 ] 0 1 1
+( -144 32 0 ) ( -143 32 0 ) ( -144 33 0 ) t_floormetal1 [ -1 0 0 -48 ] [ 0 -1 0 -48 ] 90 1 1
+( -128 48 48 ) ( -128 49 48 ) ( -127 48 48 ) t_floormetal1 [ 1 0 0 48 ] [ 0 -1 0 -48 ] 0 1 1
+( -128 48 16 ) ( -127 48 16 ) ( -128 48 17 ) t_floormetal1 [ -1 0 0 -48 ] [ 0 0 -1 -80 ] 90 1 1
+( -96 48 16 ) ( -96 48 17 ) ( -96 49 16 ) t_floormetal1 [ 0 1 0 48 ] [ 0 0 -1 -80 ] 0 1 1
+}
+}
+// entity 2
+{
+"classname" "func_movingplatform"
+"move_direction" "1.0 0.0 0.0"
+"move_distance" "5"
+"move_time" "4"
+// brush 0
+{
+( 144 240 0 ) ( 144 241 0 ) ( 144 240 1 ) t_floormetal1 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 270 1 1
+( 64 240 0 ) ( 64 240 1 ) ( 65 240 0 ) t_floormetal1 [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 64 240 0 ) ( 65 240 0 ) ( 64 241 0 ) t_floormetal1 [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 192 432 16 ) ( 192 433 16 ) ( 193 432 16 ) t_floormetal1 [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
+( 192 432 16 ) ( 193 432 16 ) ( 192 432 17 ) t_floormetal1 [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 1 1
+( 192 432 16 ) ( 192 432 17 ) ( 192 433 16 ) t_floormetal1 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
+}
+}
+// entity 3
+{
+"classname" "func_light"
+"origin" "552 8 200"
+}
+// entity 4
+{
+"classname" "func_light"
+"origin" "536 -152 200"
+}
+// entity 5
+{
+"classname" "func_light"
+"origin" "184 -72 200"
+}
+// entity 6
+{
+"classname" "func_light"
+"origin" "-24 296 200"
+}
+// entity 7
+{
+"classname" "func_light"
+"origin" "-40 -280 200"
+}
+// entity 8
+{
+"classname" "light_lamppost"
+"origin" "387 -253 -30"
+}

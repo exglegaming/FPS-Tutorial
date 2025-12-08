@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [file_customization]
 
@@ -26,8 +26,13 @@ folder_colors={
 "res://assets/": "green",
 "res://levels/": "yellow",
 "res://scenes/": "blue",
-"res://scripts/": "orange"
+"res://scripts/": "orange",
+"res://trenchbroom/": "gray"
 }
+
+[func_godot]
+
+model_point_class_save_path="trenchbroom/models"
 
 [input]
 

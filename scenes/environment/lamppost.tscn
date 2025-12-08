@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b73a7ify8in5h"]
+
+[ext_resource type="Texture2D" uid="uid://c2tdj8uwfifaw" path="res://trenchbroom/textures/t_floormetal1.png" id="1_t2cvm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4sg2h"]
+albedo_texture = ExtResource("1_t2cvm")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4sg2h"]
+material = SubResource("StandardMaterial3D_4sg2h")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 3.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("CylinderMesh_4sg2h")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3736665, 0)
+light_color = Color(1, 0.64705884, 0, 1)
+shadow_enabled = true
+omni_range = 8.5

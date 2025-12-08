@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=6 format=3 uid="uid://cg2wukgprdbsa"]
+
+[ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_4baas"]
+[ext_resource type="Script" uid="uid://drlmgulwbjwqu" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_un1c0"]
+[ext_resource type="Resource" uid="uid://j4hk3hpa2qx4" path="res://trenchbroom/fgd/solid/func_moving_platform.tres" id="2_gxehv"]
+[ext_resource type="Resource" uid="uid://c6avn22dphcvn" path="res://trenchbroom/fgd/point/func_light.tres" id="3_3aev0"]
+[ext_resource type="Resource" uid="uid://cy35qi6vgj56v" path="res://trenchbroom/fgd/model_point/light_lamppost.tres" id="4_hpyi5"]
+
+[resource]
+script = ExtResource("1_un1c0")
+fgd_name = "FpsTutorial"
+base_fgd_files = Array[Resource]([ExtResource("1_4baas")])
+entity_definitions = Array[Resource]([ExtResource("2_gxehv"), ExtResource("3_3aev0"), ExtResource("4_hpyi5")])
+metadata/_custom_type_script = "uid://drlmgulwbjwqu"
